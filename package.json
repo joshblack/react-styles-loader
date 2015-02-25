@@ -1,9 +1,13 @@
 {
   "name": "react-styles-loader",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "author": "Josh Black <joshuatblack@ufl.edu>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joshblack/react-styles-loader"
+  }
   "dependencies": {
     "autoprefixer-core": "^5.1.7",
     "gulp": "^3.8.11",
