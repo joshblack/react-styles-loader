@@ -1,21 +1,30 @@
 "use strict";
 
+var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["default"] : obj; };
+
 var _slicedToArray = function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; for (var _iterator = arr[Symbol.iterator](), _step; !(_step = _iterator.next()).done;) { _arr.push(_step.value); if (i && _arr.length === i) break; } return _arr; } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } };
 
 var _defineProperty = function (obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); };
 
-var loaderUtils = require("loader-utils");
-var autoprefixer = require("autoprefixer-core");
-var camelizeStyleName = require("../src/camelizeStyleName");
-var assign = require("../src/Object.assign");
-var _ = require("lodash");
+var _ = _interopRequire(require("lodash"));
 
-module.exports = function (source) {
-    var lines = eval(source);
-    var output = prefixAll(lines);
+var loaderUtils = _interopRequire(require("loader-utils"));
 
-    return "module.exports = " + JSON.stringify(output);
-};
+var Parser = _interopRequire(require("react-styles-parser"));
+
+var autoprefixer = _interopRequire(require("autoprefixer-core"));
+
+var camelizeStyleName = _interopRequire(require("./vendor/camelizeStyleName"));
+
+var assign = _interopRequire(require("./vendor/Object.assign"));
+
+function transform(source) {
+    var output = prefixAll(Parser(source));
+
+    return "module.exports=" + JSON.stringify(output);
+}
+
+module.exports = transform;
 
 function prefixAll(obj) {
     var output = {};
@@ -36,7 +45,15 @@ function prefixAll(obj) {
                     var prop = _statement$split2[0];
                     var value = _statement$split2[1];
 
-                    assign(output, _defineProperty({}, camelizeStyleName(prop), value));
+                    if (output[camelizeStyleName(prop)]) {
+
+                        if (!Array.isArray(output[prop])) {
+                            output[prop] = [output[prop]];
+                        }
+                        output[prop].push(value);
+                    } else {
+                        assign(output, _defineProperty({}, camelizeStyleName(prop), value));
+                    }
                 });
             } else if (prefixed.length === 1) {
                 var _prefixed$shift$split = prefixed.shift().split(":");
@@ -55,5 +72,5 @@ function prefixAll(obj) {
 }
 
 function format(property, value) {
-    return property + ":" + value;
+    return "" + property + ":" + value;
 }

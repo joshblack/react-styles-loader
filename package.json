@@ -8,11 +8,31 @@
     "type": "git",
     "url": "https://github.com/joshblack/react-styles-loader"
   },
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "testFileExtensions": [
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json"
+    ]
+  },
   "dependencies": {
     "autoprefixer-core": "^5.1.7",
+    "core-js": "^0.6.1",
     "gulp": "^3.8.11",
     "gulp-babel": "^4.0.0",
     "loader-utils": "^0.2.6",
-    "lodash": "^3.3.1"
+    "lodash": "^3.3.1",
+    "react-styles-parser": "0.0.1"
+  },
+  "devDependencies": {
+    "babel-jest": "^4.0.0",
+    "del": "^1.1.1",
+    "jest-cli": "^0.4.0"
   }
 }

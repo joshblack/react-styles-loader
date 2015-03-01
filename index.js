@@ -1,3 +1,5 @@
 'use strict';
 
-module.exports = require('./dist');
+require('core-js');
+
+module.exports = require('./dist/transform');
