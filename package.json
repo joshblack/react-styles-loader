@@ -1,6 +1,6 @@
 {
   "name": "react-styles-loader",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "",
   "main": "index.js",
   "author": "Josh Black <joshuatblack@ufl.edu>",
@@ -28,7 +28,7 @@
     "gulp-babel": "^4.0.0",
     "loader-utils": "^0.2.6",
     "lodash": "^3.3.1",
-    "react-styles-parser": "0.0.1"
+    "react-styles-parser": "0.0.3"
   },
   "devDependencies": {
     "babel-jest": "^4.0.0",
